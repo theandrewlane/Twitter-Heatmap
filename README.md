@@ -6,7 +6,7 @@
 
 ###Links
 - [Slack](cs4230hq.slack.com) (repository integration coming soon)
-- Travis CI (repository integration coming soon)
+- Travis CI [![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=plastic)](https://github.com/WeberCS4230/Twitter-Thing) (repository integration coming soon) 
 
 ###Setup
 
