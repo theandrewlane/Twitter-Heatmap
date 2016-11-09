@@ -21,6 +21,7 @@ Note: Uses Tomcat Embedded
 
 ###Run
 Note: If you clone this repository through IntelliJ, it should add the run configuration for you
+
 1. Right click on ```pom.xml``` and select "Add as Maven Project" - You'll also want to enable auto-import
 2. Run ```mvn install``` from a terminal - this will download dependencies, and package the app (.jar for now)
 3. Run ```mvn spring-boot:run``` to start the Spring Boot application OR use the run configuration in IntelliJ
