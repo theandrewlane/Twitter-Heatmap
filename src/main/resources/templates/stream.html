@@ -1,0 +1,22 @@
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hello Twitter Stream</title>
+</head>
+<!--<script type="text/javascript">-->
+    <!--setTimeout(function(){-->
+        <!--location = ''-->
+    <!--},5000)-->
+<!--</script>-->
+<body>
+<h4>The Twitter Stream:</h4>
+<ul>
+    <p th:each="tweet:${tweets}"
+        th:text="${tweet.text} + ' tweeted by - ' + ${tweet.user.name}
+                    + ' from ' + ${tweet.user.location}
+                    + ' @ ' + ${tweet.createdAt}">
+        Tweet
+    </p>
+</ul>
+</body>
+</html>
