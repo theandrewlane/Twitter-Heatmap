@@ -1,6 +1,8 @@
 #CS 4230 - Group Project
 <hr>
 
+[![Build Status](https://travis-ci.com/WeberCS4230/Twitter-Thing.svg?token=Ntw63fVp4a3VNZLyV15H&branch=master)](https://travis-ci.com/WeberCS4230/Twitter-Thing)
+
 ####This project uses [Spring Boot](https://projects.spring.io/spring-boot/) and the [Thymeleaf template engine](http://www.thymeleaf.org/)
 
 ###Documents
@@ -8,7 +10,7 @@
 
 ###Links
 - [Slack](cs4230hq.slack.com) (repository integration coming soon)
-- Travis CI [![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=plastic)](https://github.com/WeberCS4230/Twitter-Thing) (repository integration coming soon) 
+- [Travis CI](https://github.com/WeberCS4230/Twitter-Thing)
 
 ###Setup 
 Note: Uses Tomcat Embedded
