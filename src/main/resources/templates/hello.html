@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Hello Thymeleaf!</title>
+    <title>Hello Twitter</title>
 </head>
 <body>
-<p th:text="'Hello, ' + ${name} + '!'" />
+<h3>Hello, <span th:text="${twitterProfile.name}">Some User</span>!</h3>
+
+<h4>These are your friends:</h4>
+
+<ul>
+    <li th:each="friend:${friends}" th:text="${friend.name}">Friend</li>
+</ul>
 </body>
 </html>
