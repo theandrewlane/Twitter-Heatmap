@@ -6,27 +6,22 @@
             th:src="@{/webjars/materializecss/0.97.7/js/materialize.min.js}"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"
-          th:href="@{/webjars/materializecss/0.97.7/css/materialize.min.css}" rel="stylesheet" />
+          th:href="@{/webjars/materializecss/0.97.7/css/materialize.min.css}" rel="stylesheet"/>
     <title>Twitter Demo</title>
 
     <script>
-        $( document ).ready(function(){
+        $(document).ready(function () {
             $(".button-collapse").sideNav();
         });
     </script>
 </head>
 <body>
 <div th:replace="/fragments/header :: nav">...</div>
-<h2>
-    You are now connected to your Twitter account.
-</h2>
-<h4>
+<h4>Twitter Stream:</h4>
+<p> Actually just check your console, this isn't really working without AJAX</p>
 
-    Click <a href="/">here</a> to see a search query for #beerpong.
-</h4>
-<h4>
-
-    Click <a href="/stream">here</a> to see a live twitter stream.
-</h4>
+    <ul class="collection">
+        <li th:each="tweet:${tweets}"  th:text="${tweet.user.name}" class="collection-item">...</li>
+    </ul>
 </body>
 </html>

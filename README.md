@@ -20,6 +20,7 @@ Note: Uses Tomcat Embedded
     - Maven Integration
     - Maven Integration Plugin
 3. Enable Spring plugins via IntelliJ Plugin Settings (everything)
+4. Install Live Reload Chrome Plugin
 
 ###Run
 Note: If you clone this repository through IntelliJ, it should add the run configuration for you
