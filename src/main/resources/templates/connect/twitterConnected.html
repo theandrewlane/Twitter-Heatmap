@@ -1,13 +1,32 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Hello Twitter</title>
+    <script src="http://code.jquery.com/jquery-3.1.1.js" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"
+            th:src="@{/webjars/materializecss/0.97.7/js/materialize.min.js}"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"
+          th:href="@{/webjars/materializecss/0.97.7/css/materialize.min.css}" rel="stylesheet" />
+    <title>Twitter Demo</title>
+
+    <script>
+        $( document ).ready(function(){
+            $(".button-collapse").sideNav();
+        });
+    </script>
 </head>
 <body>
-<h3>Connected to Twitter</h3>
-
-<p>
+<div th:replace="/fragments/header :: nav">...</div>
+<h2>
     You are now connected to your Twitter account.
-    Click <a href="/">here</a> to see your Twitter friends.
-</p>
+</h2>
+<h4>
+
+    Click <a href="/">here</a> to see a search query for #beerpong.
+</h4>
+<h4>
+
+    Click <a href="/stream">here</a> to see a live twitter stream.
+</h4>
 </body>
 </html>

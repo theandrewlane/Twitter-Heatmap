@@ -14,16 +14,15 @@ import java.util.List;
 public class StreamService {
 
     private final Logger log = LoggerFactory.getLogger(StreamService.class);
-    List<Tweet> tweets = new ArrayList<>();
+    private final List<Tweet> tweets = new ArrayList<>();
 
     @Autowired
     private Twitter twitter;
 
-    public List<Tweet> streamApi(Model model, int time) throws InterruptedException {
+    public List<Tweet> streamApi(Model model) throws InterruptedException {
 
 
         List<StreamListener> listeners = new ArrayList<>();
-        System.out.print(time);
         StreamListener streamListener = new StreamListener() {
 
             @Override
@@ -65,8 +64,8 @@ public class StreamService {
         filterStreamParameters.addLocation(west, south, east, north);
 
         Stream userStream = twitter.streamingOperations().filter(filterStreamParameters, listeners);
-        Thread.sleep(10000);
-        userStream.close();
+        Thread.sleep(5000); //Use AJAX
+        //userStream.close();
         return tweets;
     }
 }
