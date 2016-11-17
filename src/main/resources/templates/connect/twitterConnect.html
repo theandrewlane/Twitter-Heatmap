@@ -1,35 +1,20 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-
-
-<head>
-    <script src="http://code.jquery.com/jquery-3.1.1.js" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"
-            th:src="@{/webjars/materializecss/0.97.7/js/materialize.min.js}"></script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"
-          th:href="@{/webjars/materializecss/0.97.7/css/materialize.min.css}" rel="stylesheet" />
-    <title>Twitter Demo</title>
-
-    <script>
-        $( document ).ready(function(){
-            $(".button-collapse").sideNav();
-        });
-    </script>
-</head>
+<head th:replace="/header/libs">...</head>
 <body>
-<div th:replace="/fragments/header :: nav">...</div>
-<h3>Connect to Twitter</h3>
-<span th:if="${social_provider_error}">Provider error (maybe you need to configure the app id and secret?)</span>
-<form action="/connect/twitter" method="POST">
-    <div class="formInfo">
-        <p>You aren't connected to Twitter yet. Click the button to connect this application with your Twitter account.</p>
+<nav th:replace="/header/header">...</nav>
+<div class="container" id="main-content">
+    <div class="jumbotron">
+
+        <h3>Connect to Twitter</h3>
+        <span th:if="${social_provider_error}">Provider error (maybe you need to configure the app id and secret?)</span>
+        <form action="/connect/twitter" method="POST">
+            <div class="formInfo">
+                <p>You aren't connected to Twitter yet. Click the button to connect this application with your Twitter
+                    account.</p>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary">Connect To Twitter</button>
+        </form>
     </div>
-    <p>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Connect to Twitter
-            <i class="material-icons right">send</i>
-        </button>
-    </p>
-</form>
+</div>
 </body>
 </html>

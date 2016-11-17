@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/header/libs">...</head>
+<body>
+<nav th:replace="/header/header">...</nav>
+<div class="container" id="main-content">
+    <div class="jumbotron">
+        <h3>Showing related #beerPong tweets:</h3>
+        <div class="col-lg-10 row">
+                <button id="current-location" class="btn btn-sm btn-primary" onclick="useLocation()" type="button">Get Current
+                    Location
+                </button>
+                <input type="text" disabled="disabled" id="input-location" placeholder="Location..."/>
+        </div>
+        <div class="row"></div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>@User</th>
+                <th>Tweet</th>
+                <th>Location</th>
+            </tr>
+            </thead>
+            <tbody id="tweet-content">
+            <tr th:each="tweet:${tweets}">
+                <td>
+                    <a th:href="${tweet.user.profileUrl}" th:text="| @${tweet.fromUser} |">...</a>
+                </td>
+                <td th:text="| ${tweet.text} |"/>
+                <td th:text="| ${tweet.user.location} |"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

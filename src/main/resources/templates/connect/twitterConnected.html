@@ -1,32 +1,17 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <script src="http://code.jquery.com/jquery-3.1.1.js" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"
-            th:src="@{/webjars/materializecss/0.97.7/js/materialize.min.js}"></script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"
-          th:href="@{/webjars/materializecss/0.97.7/css/materialize.min.css}" rel="stylesheet" />
-    <title>Twitter Demo</title>
-
-    <script>
-        $( document ).ready(function(){
-            $(".button-collapse").sideNav();
-        });
-    </script>
-</head>
+<head th:replace="/header/libs">...</head>
 <body>
-<div th:replace="/fragments/header :: nav">...</div>
-<h2>
-    You are now connected to your Twitter account.
-</h2>
-<h4>
-
-    Click <a href="/">here</a> to see a search query for #beerpong.
-</h4>
-<h4>
-
-    Click <a href="/stream">here</a> to see a live twitter stream.
-</h4>
+<nav th:replace="/header/header">...</nav>
+<div class="container" id="main-content">
+    <div class="jumbotron">
+        <h3>Twitter account successfully authenticated</h3>
+        <h4>
+             <a href="/twitter-search">Search Twitter for <b>#beerpong</b></a>
+        </h4>
+        <h4>
+             <a href="/twitter-stream">Stream Tweets based on <b>location</b></a>
+        </h4>
+    </div>
+</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.cs4230.finalproject;
+package com.cs4230.finalproject.controller;
 
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.twitter.api.SearchResults;
@@ -15,39 +15,37 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class TwitterController {
-private final StreamService streamService;
+private final TwitterStreamController twitterStreamController;
     private final Twitter twitter;
-
     private final ConnectionRepository connectionRepository;
 
     @Inject
-    public TwitterController(StreamService streamService, Twitter twitter, ConnectionRepository connectionRepository) {
-        this.streamService = streamService;
+    public TwitterController(TwitterStreamController streamService, Twitter twitter, ConnectionRepository connectionRepository) {
+        this.twitterStreamController = streamService;
         this.twitter = twitter;
         this.connectionRepository = connectionRepository;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/twitter-search")
     public String helloTwitter(Model model) {
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
-            return "redirect:/connect/twitter";
-        }
-
-        model.addAttribute(twitter.userOperations().getUserProfile());
+            return "forward:/connect/twitter";
+        }        model.addAttribute(twitter.userOperations().getUserProfile());
         SearchResults tweets  = twitter.searchOperations().search("#BeerPong");
         List<Tweet> tweetz = new ArrayList<>();
         tweetz.addAll(tweets.getTweets());
         model.addAttribute("tweets", tweetz);
-        return "tweet";
+        return "twitterSearch/search";
     }
 
-    @RequestMapping("/stream")
+    @RequestMapping("/twitter-stream")
     public String streamTweet(Model model) throws InterruptedException{
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
-            return "redirect:/connect/twitter";
+            return "forward:/connect/twitter";
         }
-        model.addAllAttributes(streamService.streamApi(model));
-        return "stream";
+        twitterStreamController.streamApi(model);
+        return "twitterStream/stream";
     }
+
 
 }

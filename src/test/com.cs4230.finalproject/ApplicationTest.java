@@ -46,12 +46,12 @@ public class ApplicationTest {
     @Test
     public void homePageRedirects() throws Exception {
         mockMvc.perform(get("/")).andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/connect/twitter"));
+                .andExpect(redirectedUrl("/twitterConnect/twitter"));
     }
 
     @Test
     public void connectPageHasLink() throws Exception {
-        mockMvc.perform(get("/connect/twitter")).andExpect(status().isOk())
+        mockMvc.perform(get("/twitterConnect/twitter")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Connect to Twitter")));
     }
 
@@ -59,13 +59,13 @@ public class ApplicationTest {
     public void connectHandlerRedirects() throws Exception {
         if (appId.startsWith("{{")) {
             // User hasn't configured app
-            MvcResult result = mockMvc.perform(post("/connect/twitter"))
-                    .andExpect(redirectedUrl("/connect/twitter")).andReturn();
+            MvcResult result = mockMvc.perform(post("/twitterConnect/twitter"))
+                    .andExpect(redirectedUrl("/twitterConnect/twitter")).andReturn();
             assertThat(result.getRequest().getSession()
                     .getAttribute("social_provider_error")).isNotNull();
         }
         else {
-            mockMvc.perform(post("/connect/twitter"))
+            mockMvc.perform(post("/twitterConnect/twitter"))
                     .andExpect(redirectedUrlPattern("https://api.twitter.com/**"));
         }
     }

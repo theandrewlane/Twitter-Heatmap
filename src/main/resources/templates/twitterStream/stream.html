@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/header/libs">...</head>
+<body>
+<nav th:replace="/header/header">...</nav>
+<div id="main-content" class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label for="connect">WebSocket connection:</label>
+                <button id="connect" class="btn btn-default" onclick="connect()" type="submit">Connect</button>
+                <button id="disconnect" class="btn btn-default" onclick="disconnect()" type="submit"
+                        disabled="disabled">Disconnect
+                </button>
+                <button id="current-location" class="btn btn-primary" onclick="useLocation()" type="button">Get Current
+                    Location
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-btn"><button class="btn btn-default" type="button">Search!</button></span>
+                    <input type="text" class="form-control" id="input-location" placeholder="Enter A Location..."/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h5 id="tweet-count"></h5>
+            <table id="tweet-table" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Tweet</th>
+                    <th>Location</th>
+                </tr>
+                </thead>
+                <tbody id="tweet-content">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
