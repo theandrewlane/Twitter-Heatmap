@@ -1,7 +1,5 @@
 package com.cs4230.finalproject.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -38,7 +36,7 @@ public class TwitterStreamController {
         this.template.convertAndSend("/topic/tweets", tweet);
     }
 
-    private final Logger log = LoggerFactory.getLogger(TwitterStreamController.class);
+    //    private final Logger log = LoggerFactory.getLogger(TwitterStreamController.class);
     private final List<Tweet> tweets = new ArrayList<>();
 
     @Autowired
