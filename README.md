@@ -2,8 +2,9 @@
 <hr>
 
 [![Build Status](https://travis-ci.com/WeberCS4230/Twitter-Thing.svg?token=Ntw63fVp4a3VNZLyV15H&branch=master)](https://travis-ci.com/WeberCS4230/Twitter-Thing)
-
-####This project uses [Spring Boot](https://projects.spring.io/spring-boot/) and the [Thymeleaf template engine](http://www.thymeleaf.org/)
+Automatically deployed [here](https://cs4230-twitter-thing.herokuapp.com/twitter-stream) after each commit
+#
+###This project uses [Spring Boot](https://projects.spring.io/spring-boot/) and the [Thymeleaf template engine](http://www.thymeleaf.org/)
 
 ###Documents
 - [Group Contract](./docs/group-contract.md)
