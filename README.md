@@ -1,32 +1,24 @@
 #CS 4230 - Group Project
 <hr>
-
+##Realtime Travis CI Build Status: 
 [![Build Status](https://travis-ci.com/WeberCS4230/Twitter-Thing.svg?token=Ntw63fVp4a3VNZLyV15H&branch=master)](https://travis-ci.com/WeberCS4230/Twitter-Thing)
-Automatically deployed [here](https://cs4230-twitter-thing.herokuapp.com/twitter-stream) after each commit
-#
-###This project uses [Spring Boot](https://projects.spring.io/spring-boot/) and the [Thymeleaf template engine](http://www.thymeleaf.org/)
 
-###Documents
+##Realtime Heroku Deploument Status: 
+[![Heroku Deployment Status](https://heroku-badge.herokuapp.com/?app=cs4230-twitter-thing&svg=1)](https://cs4230-twitter-thing.herokuapp.com/) 
+
+##Links:
+#####Application (deployed) logs are available [here](https://papertrailapp.com/systems/cs4230-twitter-thing/events).
+#####[![Slack](https://camo.githubusercontent.com/f466a36662892c81d95217c0fb2745e46acd60d6/68747470733a2f2f6272616e64666f6c6465722e636f6d2f6170692f66617669636f6e2f69636f6e3f73697a653d313626646f6d61696e3d7777772e736c61636b2e636f6d)](https://cs4230hq.slack.com) Slack Chatroom
+#####[Deployed App](https://cs4230-twitter-thing.herokuapp.com/) (or click the Heroku badge above)
+#####[Travis CI Build Server](https://travis-ci.com/WeberCS4230/Twitter-Thing) (or click the Travis CI badge above)
+
+##Documents:
 - [Group Contract](./docs/group-contract.md)
+- [Application Spec](./docs/group-spec)
 
-###Links
-- [Slack](cs4230hq.slack.com) (repository integration coming soon)
-- [Travis CI](https://github.com/WeberCS4230/Twitter-Thing)
+###Run:
+1. Run ```mvn spring-boot:run``` to start the Spring Boot application
+2. Twitter-Thing will now be available @[http://localhost:8080/](http://localhost:8080/)
 
-###Setup 
-Note: Uses Tomcat Embedded
-
-1. Install [Maven](https://maven.apache.org/download.cgi) (intellij should have it already)
-2. Enable Maven plugins via IntelliJ Plugin Settings
-    - Maven Integration
-    - Maven Integration Plugin
-3. Enable Spring plugins via IntelliJ Plugin Settings (everything)
-4. Install Live Reload Chrome Plugin
-
-###Run
-Note: If you clone this repository through IntelliJ, it should add the run configuration for you
-
-1. Right click on ```pom.xml``` and select "Add as Maven Project" - You'll also want to enable auto-import
-2. Run ```mvn install``` from a terminal - this will download dependencies, and package the app (.jar for now)
-3. Run ```mvn spring-boot:run``` to start the Spring Boot application OR use the run configuration in IntelliJ
-5. You should now be able to access the Spring App @[http://localhost:8080/](http://localhost:8080/)
+###Develop
+It is recommended that you use [Live Reload](http://livereload.com/) (Chrome Plugin) which will allow auto-hotswapping.
