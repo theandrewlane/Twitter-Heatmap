@@ -26,6 +26,14 @@ private final TwitterStreamController twitterStreamController;
         this.connectionRepository = connectionRepository;
     }
 
+    @RequestMapping("/")
+    public String home() {
+        if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+            return "forward:/connect/twitter";
+        }
+        return null;
+    }
+
     @RequestMapping("/twitter-search")
     public String helloTwitter(Model model) {
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
