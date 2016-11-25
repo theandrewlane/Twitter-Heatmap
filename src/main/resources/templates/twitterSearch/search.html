@@ -1,36 +1,17 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="header/libs">...</head>
-<body>
-<nav th:replace="header/header">...</nav>
-<div class="container" id="main-content">
-    <div class="jumbotron">
-        <h3>Showing related #beerPong tweets:</h3>
-        <div class="col-lg-10 row">
-                <button id="current-location" class="btn btn-sm btn-primary" onclick="useLocation()" type="button">Get Current
-                    Location
-                </button>
-                <input type="text" disabled="disabled" id="input-location" placeholder="Location..."/>
-        </div>
-        <div class="row"></div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>@User</th>
-                <th>Tweet</th>
-                <th>Location</th>
-            </tr>
-            </thead>
-            <tbody id="tweet-content">
-            <tr th:each="tweet:${tweets}">
-                <td>
-                    <a th:href="${tweet.user.profileUrl}" th:text="| @${tweet.fromUser} |">...</a>
-                </td>
-                <td th:text="| ${tweet.text} |"/>
-                <td th:text="| ${tweet.user.location} |"/>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div th:if="${isSearching}" class="mdl-shadow--12dp mdl-color--white mdl-cell mdl-cell--12-col" xmlns:th="http://www.w3.org/1999/xhtml">
+    <p class="mdl-layout-title">Showing related #beerPong tweets:</p>
+    <input id="search" placeholder="enter a search term"/>
+    <button class="mdl-button" onclick="search()"/>
+    <ul class="mdl-list" id="tweet-content">
+        <li th:each="tweet:${tweets}" class="mdl-list__item mdl-list__item--three-line">
+                <span class="mdl-list__item-primary-content">
+                  <img th:src="${tweet.user.profileImageUrl}" class="img-circle" style="width:48px;height:48px;">
+                  <span><a th:href="${tweet.user.profileUrl}" th:text="${tweet.fromUser}"></a></span>
+                  <span class="mdl-list__item-text-body" th:text="${tweet.text}"></span>
+                </span>
+        </li>
+    </ul>
 </div>
-</body>
-</html>
+
+
+
