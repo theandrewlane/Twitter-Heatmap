@@ -19,6 +19,7 @@ import java.util.List;
 public class TwitterStreamController {
 
     private SimpMessagingTemplate template;
+private Float east = -111.89f, south = 40.86f;
 
     @Autowired
     public TwitterStreamController(SimpMessagingTemplate template) {
@@ -62,27 +63,52 @@ public class TwitterStreamController {
             @Override
             public void onLimit(int numberOfLimitedTweets) {
                 // TODO Auto-generated method stub
+            System.out.println("You've reached the tweet limits!");
 
             }
 
             @Override
             public void onDelete(StreamDeleteEvent deleteEvent) {
                 // TODO Auto-generated method stub
+            System.out.println("Tweet Deleted!");
 
             }
         };
 
         listeners.add(streamListener);
-        //This sets the GeoCode (-122.75,36.8,-121.75,37.8) of San Francisco(South-West and North-East) region as given in below twitter docs
-        Float west = -122.75f;
-        Float south = 36.8f;
-        Float east = -121.75f;
-        Float north = 37.8f;
+//    west - the longitude of the western side of the location's bounding box.
+//    south - the latitude of the southern side of the location's bounding box.
+//    east - the longitude of the eastern side of the location's bounding box.
+//    north - the latitude of the northern side of the location's bounding box.
+    Float west = getEast() + 2.5f;
+//        south = 40.76f;
+//        east = -111.89f;
+    Float north = getSouth() + 2.5f;
 
         FilterStreamParameters filterStreamParameters = new FilterStreamParameters();
         filterStreamParameters.addLocation(west, south, east, north);
 
         twitter.streamingOperations().filter(filterStreamParameters, listeners);
         return tweets;
+    }
+
+public Float getEast()
+    {
+    return east;
+    }
+
+public void setEast(Float east)
+    {
+    this.east = east;
+    }
+
+public Float getSouth()
+    {
+    return south;
+    }
+
+public void setSouth(Float south)
+    {
+    this.south = south;
     }
 }

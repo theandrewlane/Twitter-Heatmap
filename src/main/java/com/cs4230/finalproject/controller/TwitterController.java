@@ -26,6 +26,7 @@ private final TwitterStreamController twitterStreamController;
         this.connectionRepository = connectionRepository;
     }
 
+//checks to see if the user is authorized to use twitter if not then it
     @RequestMapping("/")
     public String home() {
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
@@ -36,19 +37,25 @@ private final TwitterStreamController twitterStreamController;
 
     @RequestMapping("/twitter-search")
     public String helloTwitter(Model model) {
-        if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+    if (connectionRepository.findPrimaryConnection(Twitter.class) == null)
+        {
             return "forward:/connect/twitter";
-        }        model.addAttribute(twitter.userOperations().getUserProfile());
+        }
+
+    model.addAttribute(twitter.userOperations().getUserProfile());
         SearchResults tweets  = twitter.searchOperations().search("#BeerPong");
+
         List<Tweet> tweetz = new ArrayList<>();
-        tweetz.addAll(tweets.getTweets());
+
+    tweetz.addAll(tweets.getTweets());
         model.addAttribute("tweets", tweetz);
         return "twitterSearch/search";
     }
 
     @RequestMapping("/twitter-stream")
     public String streamTweet(Model model) throws InterruptedException{
-        if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+    if (connectionRepository.findPrimaryConnection(Twitter.class) == null)
+        { //if authorization isn't successful; notify user
             return "forward:/connect/twitter";
         }
         twitterStreamController.streamApi(model);

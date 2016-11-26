@@ -64,6 +64,11 @@
             <version>3.1.0</version>
         </dependency>
     </dependencies>
+    <dependency>
+        <groupId>com.google.maps</groupId>
+        <artifactId>google-maps-services</artifactId>
+        <version>(insert latest version)</version>
+    </dependency>
     <build>
         <plugins>
             <plugin>

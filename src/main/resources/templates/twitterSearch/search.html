@@ -4,6 +4,7 @@
 <nav th:replace="header/header">...</nav>
 <div class="container" id="main-content">
     <div class="jumbotron">
+        <h3>Hello, <span th:text="${twitterProfile.name}">Some User</span>!</h3>
         <h3>Showing related #beerPong tweets:</h3>
         <div class="col-lg-10 row">
                 <button id="current-location" class="btn btn-sm btn-primary" onclick="useLocation()" type="button">Get Current
