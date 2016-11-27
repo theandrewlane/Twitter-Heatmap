@@ -20,6 +20,8 @@ public class TwitterStreamController {
 
     private SimpMessagingTemplate template;
 
+    private TweetAnalysis ta = new TweetAnalysis();
+
     @Autowired
     public TwitterStreamController(SimpMessagingTemplate template) {
         this.template = template;
@@ -55,6 +57,9 @@ public class TwitterStreamController {
 
             @Override
             public void onTweet(Tweet tweet) {
+                //add to analysis controller
+                ta.add(tweet);
+                //ta.print();
                 tweets.add(tweet);
                 tweetStream(tweet);
             }
@@ -74,10 +79,10 @@ public class TwitterStreamController {
 
         listeners.add(streamListener);
         //This sets the GeoCode (-122.75,36.8,-121.75,37.8) of San Francisco(South-West and North-East) region as given in below twitter docs
-        Float west = -122.75f;
-        Float south = 36.8f;
-        Float east = -121.75f;
-        Float north = 37.8f;
+        Float west = -124.84f;
+        Float south = 24.39f;
+        Float east = -66.88f;
+        Float north = 49.38f;
 
         FilterStreamParameters filterStreamParameters = new FilterStreamParameters();
         filterStreamParameters.addLocation(west, south, east, north);
