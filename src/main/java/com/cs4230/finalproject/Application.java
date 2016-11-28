@@ -15,10 +15,10 @@ public class Application {
     @Bean
     public Twitter twitter() {
         //Should set these as environment variables on our app server
-        String consumerKey = "36l901PIgIUBMD44PtfW9jMvK"; // The application's consumer key
-        String consumerSecret = "2tbEC4zA8yZ2FARRQP6aiQUH9OaPrPAtrJxsIJuxIhU65ByHXE"; // The application's consumer secret
-        String accessToken = "116844737-JhEcoCteosHLPYm02k7ZGWZ3jW6jFWIiyIgDjp51"; // The access token granted after OAuth authorization
-        String accessTokenSecret = "Q8XMMcGMg6IiXkrqLTt26yWo0JV6Q1Ta3fDWIoocuBd49"; // The access token secret granted after OAuth authorization
+        String consumerKey = "Xx4kDdCGz6eLViniKP7Tib14W"; // The application's consumer key
+        String consumerSecret = "5nQNHJjSkW1Csk2UHg394SfRJz2ZVdeGv3qS5l1oXPBP6FpURe"; // The application's consumer secret
+        String accessToken = "801175468388945920-clf0yXAQ7edbVgehemQc6udEqqTKj3m"; // The access token granted after OAuth authorization
+        String accessTokenSecret = "M9z1953ZSftGDUxyviln72dEFsnZKAMNUeUJDFv7lEcei"; // The access token secret granted after OAuth authorization
         return new TwitterTemplate(consumerKey, consumerSecret, accessToken, accessTokenSecret);
     }
 }
