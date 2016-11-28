@@ -65,4 +65,11 @@ public class TwitterController {
         twitterStreamService.streamApi(model);
         return "index";
     }
+
+    @RequestMapping("/twitter-map")
+    public String map(Model model) {
+
+        model.addAttribute("isMap", true);
+        return "index";
+    }
 }
