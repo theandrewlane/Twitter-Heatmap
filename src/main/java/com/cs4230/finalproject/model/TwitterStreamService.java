@@ -1,6 +1,5 @@
 package com.cs4230.finalproject.model;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -40,7 +39,7 @@ public class TwitterStreamService {
         this.template.convertAndSend("/tweets/stream", tweet);
     }
 
-    private final org.slf4j.Logger log = LoggerFactory.getLogger(TwitterStreamService.class);
+//    private final org.slf4j.Logger log = LoggerFactory.getLogger(TwitterStreamService.class);
     private final List<Tweet> tweets = new ArrayList<>();
 
     @Autowired
