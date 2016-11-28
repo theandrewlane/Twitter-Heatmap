@@ -1,5 +1,6 @@
 package com.cs4230.finalproject.model;
 
+import com.cs4230.finalproject.controller.TweetAnalysis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -33,7 +34,6 @@ public class TwitterStreamService {
 ////Data from view should be sent here
 //
 //    }
-
 
 
     @SendTo("/tweets/stream")

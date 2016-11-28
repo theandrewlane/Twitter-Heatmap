@@ -68,7 +68,7 @@ public class TweetAnalysis {
             public void run() {
                 try {
                     if(!htMap.isEmpty()) {
-                        pw = new PrintWriter(new FileOutputStream("hashmap.txt", false));
+                        pw = new PrintWriter(new FileOutputStream("hashmap.json", false));
                         Gson gson = new Gson();
                         String json = gson.toJson(htMap);
                         pw.write(json);
@@ -80,6 +80,4 @@ public class TweetAnalysis {
             }
         }, increment, increment);
     }
-
-
 }
