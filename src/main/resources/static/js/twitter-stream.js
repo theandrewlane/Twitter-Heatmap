@@ -5,6 +5,44 @@ let socket,
 
 $(() => {
     const self = this;
+
+    /* HeatMap */
+
+    let map;
+    let heatmap;
+
+    const arrayOfPoints = [new google.maps.LatLng(33.332718, -111.993474)];
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: {lat: 33.332718, lng: -111.993474},
+        mapTypeId: 'satellite'
+    });
+
+    // Heatmap data
+    self.getPoints = () => {
+        return arrayOfPoints;
+    };
+
+    //add a point
+    self.addPoint = (lat, lng) => {
+        self.getPoints().push(new google.maps.LatLng(lat, lng));
+        heatmap.setMap(map);
+    };
+
+    heatmap = new google.maps.visualization.HeatmapLayer({
+        data: self.getPoints(),
+        map: map
+    });
+
+    heatmap.setMap(map);
+
+    function changeRadius() {
+        heatmap.set('radius', heatmap.get('radius') ? null : 20);
+    }
+
+    /* End HeatMap */
+
     let tweetCount = 0;
     $("#stream-spinner").hide();
 
@@ -33,7 +71,13 @@ $(() => {
         stompClient.debug = debug || null;
         $("#stream-spinner").show();
         setConnected(true);
-        return stompClient.connect({}, isConnected => stompClient.subscribe('/tweets/stream', tweet => postTweet(JSON.parse(tweet.body))));
+        return stompClient.connect({}, isConnected => {
+            stompClient.subscribe('/tweets/stream', json => {
+                    const location = JSON.parse(json.body);
+                    addPoint(location.lat, location.lng);
+                    //postTweet(JSON.parse(tweet.body));
+                });
+            });
     };
 
     self.disconnect = () => {
