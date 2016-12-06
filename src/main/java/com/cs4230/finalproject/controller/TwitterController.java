@@ -1,6 +1,5 @@
 package com.cs4230.finalproject.controller;
 
-import com.cs4230.finalproject.model.TwitterStreamService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Tweet;
@@ -63,13 +62,6 @@ public class TwitterController {
 
         model.addAttribute("isStreaming", true);
         twitterStreamService.streamApi(model);
-        return "index";
-    }
-
-    @RequestMapping("/twitter-map")
-    public String map(Model model) {
-
-        model.addAttribute("isMap", true);
         return "index";
     }
 }
