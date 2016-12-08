@@ -11,7 +11,7 @@ $(() => {
     let map;
     let heatmap;
 
-    const arrayOfPoints = [new google.maps.LatLng(33.332718, -111.993474)];
+    const arrayOfPoints = new google.maps.MVCArray();
 
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
@@ -27,7 +27,6 @@ $(() => {
     //add a point
     self.addPoint = (lat, lng) => {
         self.getPoints().push(new google.maps.LatLng(lat, lng));
-        heatmap.setMap(map);
     };
 
     heatmap = new google.maps.visualization.HeatmapLayer({
