@@ -16,7 +16,7 @@ $(() => {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: {lat: 33.332718, lng: -111.993474},
-        mapTypeId: 'satellite'
+        mapTypeId: 'roadmap'
     });
 
     // Heatmap data
