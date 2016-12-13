@@ -4,43 +4,31 @@ let socket,
     isConnected = false;
 
 $(() => {
-    const self = this;
 
-    /* HeatMap */
+    const self = this;
 
     let map;
     let heatmap;
 
     const arrayOfPoints = new google.maps.MVCArray();
+    const currentLocation = {};
 
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
-        center: {lat: 33.332718, lng: -111.993474},
-        mapTypeId: 'roadmap'
-    });
-
-    // Heatmap data
-    self.getPoints = () => {
-        return arrayOfPoints;
+    self.useLocation = () => {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+            setLocation(lat, lng);
+            getLocation(lat, lng);
+        });
     };
 
-    //add a point
-    self.addPoint = (lat, lng) => {
-        self.getPoints().push(new google.maps.LatLng(lat, lng));
+    self.getLocation = (lat, lon) => stompClient.send("/app/searchLocation", {}, JSON.stringify(currentLocation));
+
+    self.setLocation = (lat, lng) => {
+        map.setCenter(new google.maps.LatLng(lat, lng));
     };
 
-    heatmap = new google.maps.visualization.HeatmapLayer({
-        data: self.getPoints(),
-        map: map
-    });
-
-    heatmap.setMap(map);
-
-    function changeRadius() {
-        heatmap.set('radius', heatmap.get('radius') ? null : 20);
-    }
-
-    /* End HeatMap */
+    self.useLocation();
 
     let tweetCount = 0;
     $("#stream-spinner").hide();
@@ -51,17 +39,6 @@ $(() => {
         $("#disconnect").prop("disabled", !connected);
         if (connected) $("#tweet-table").show();
         else $("#conversation").hide();
-    };
-
-    self.getLocation = (lat, lon) => stompClient.send("/app/searchLocation", {}, JSON.stringify({'location': $("#location").val()}));
-
-    self.useLocation = () => {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            lat = position.coords.latitude;
-            lng = position.coords.longitude;
-            $('#input-location').val(`Lat: ${lat} Lon: ${lng}`);
-            getLocation(lat, lng)
-        });
     };
 
     self.connect = (socketPath) => {
@@ -103,6 +80,36 @@ $(() => {
 
 
     self.search = () => stompClient.send("/tweets/search", {}, $('#search').val());
+
+    /* HeatMap */
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        mapTypeId: 'roadmap'
+    });
+
+    // Heatmap data
+    self.getPoints = () => {
+        return arrayOfPoints;
+    };
+
+    //add a point
+    self.addPoint = (lat, lng) => {
+        self.getPoints().push(new google.maps.LatLng(lat, lng));
+    };
+
+    heatmap = new google.maps.visualization.HeatmapLayer({
+        data: self.getPoints(),
+        map: map
+    });
+
+    heatmap.setMap(map);
+
+    function changeRadius() {
+        heatmap.set('radius', heatmap.get('radius') ? null : 20);
+    }
+
+    /* End HeatMap */
 
 });
 
