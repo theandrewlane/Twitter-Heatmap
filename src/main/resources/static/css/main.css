@@ -269,5 +269,5 @@ _:-ms-input-placeholder, :root .demo-graph {
 }
 
 #map {
-    height: calc(100% - 72px);
+    height: 500px;
 }
