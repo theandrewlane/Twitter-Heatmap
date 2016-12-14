@@ -1,31 +1,38 @@
 package com.cs4230.finalproject.model;
 
-import com.cs4230.finalproject.Utilities.KeywordReader;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by jthomann on 12/5/16.
  */
-@Component
 public class TweetFilter {
 
-    public Tweet filterByHashTag(Set<String> keywordList, Tweet tweet) {
+    private Set<String> keywordSet;
+
+    public TweetFilter() {
+        this.keywordSet = new HashSet<>();
+        this.keywordSet.add("job");
+    }
+
+    public Tweet filterByHashTag(Tweet tweet) {
         for(HashTagEntity hashtag : tweet.getEntities().getHashTags()) {
-            if(keywordList.contains(hashtag.getText().toLowerCase())) {
+            if(keywordSet.contains(hashtag.getText().toLowerCase())) {
                 return tweet;
             }
         }
         return null;
     }
 
-    public Tweet filter(List<String> keywordList, Tweet tweet) {
+    public Tweet filter(Tweet tweet) {
         String[] tweetedWords = tweet.getText().split(" ");
-        for(String keyword : keywordList) {
+        for(String keyword : keywordSet) {
             for(String text : tweetedWords) {
                 if(text.equalsIgnoreCase(keyword)) {
                     return tweet;
