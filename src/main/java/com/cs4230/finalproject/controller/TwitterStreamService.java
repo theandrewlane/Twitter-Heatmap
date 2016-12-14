@@ -36,7 +36,7 @@ public class TwitterStreamService {
     private TweetAnalysis ta;
 
     @Autowired
-    private KeywordReader keywordReader;
+    private KeywordReader keywordReader = null;
 
     @Autowired
     private TweetFilter tf;
@@ -94,7 +94,9 @@ public class TwitterStreamService {
             @Override
             public void onTweet(Tweet tweet) {
                 //Filter each tweet
-                Set<String> set = getKeywordList();
+                Set<String> set = null;
+                if(keywordReader == null)
+                    set = getKeywordList();
                 Tweet filteredTweet = tf.filterByHashTag(set, tweet);
                 //Geocode the filtered tweet
                 JsonObject coordinates = tg.geocode(filteredTweet);
