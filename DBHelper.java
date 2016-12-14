@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -9,12 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
-import java.util.Scanner;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 public class DBHelper {
 
@@ -59,23 +52,105 @@ public class DBHelper {
         return kWords;
     }
 
-    public int login(String userName, String password) {
+    public String login(String userName, String password) {
 
-        int success = 0;
+        String success = "0";
+        PreparedStatement statement;
 
+        try {
+            String query =  "SELECT UserID FROM UserInfo WHERE UserName = ? AND Pword = ?";
 
+            statement = sqlConnection.prepareStatement(query);
+            statement.setString(1, userName);
+            statement.setString(2, password);
 
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                success = rs.getString("UserID");
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
 
         return success;
     }
 
-    public void newUserInfo(String fname, String lname, String address, String city, String state,
-                            String pCode, String country, String phone, String email) {
+    public ArrayList<String> displayProfile(String userId){
+        ArrayList<String> profile = new ArrayList<>();
+        PreparedStatement statement;
 
+        try {
+            String query =  "SELECT u.UserName, p.Firstname, p.LastName, p.Email " +
+                            "FROM Person AS p " +
+                            "JOIN  UserInfo AS u on p.PersonID = u.PersonID " +
+                            "WHERE u.userID = ?";
 
+            statement = sqlConnection.prepareStatement(query);
+            statement.setString(1, userId);
 
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                profile.add(rs.getString("UserName"));
+                profile.add(rs.getString("FirstName"));
+                profile.add(rs.getString("LastName"));
+                profile.add(rs.getString("Email"));
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
 
-
+        return profile;
     }
 
+    public void newUserInfo(String fname, String lname, String address, String city, String state,
+                            String pCode, String country, String phone, String email,
+                            String uName, String pWord) {
+
+        PreparedStatement insertPerson;
+        PreparedStatement getPersonId;
+        PreparedStatement insertUser;
+
+        String personId = "";
+
+        try {
+            String personQuery = "INSERT INTO Person (FirstName, LastName, Address, City, State, PostalCode, Country, Phone, Email) " +
+                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            insertPerson = sqlConnection.prepareStatement(personQuery);
+            insertPerson.setString(1, fname);
+            insertPerson.setString(2, lname);
+            insertPerson.setString(3, address);
+            insertPerson.setString(4, city);
+            insertPerson.setString(5, state);
+            insertPerson.setString(6, pCode);
+            insertPerson.setString(7, country);
+            insertPerson.setString(8, phone);
+            insertPerson.setString(9, email);
+
+            insertPerson.execute();
+
+            String getIdQuery = "SELECT PersonID FROM Person WHERE FirstName = ?";
+            getPersonId = sqlConnection.prepareStatement(getIdQuery);
+            getPersonId.setString(1, fname);
+
+            ResultSet personIDrs = getPersonId.executeQuery();
+            while (personIDrs.next()){
+                personId = personIDrs.getString("PersonID");
+            }
+
+            String userQuery =  "INSERT INTO UserInfo (PersonID, UserName, Pword) " +
+                                "VALUES (?, ?, ?)";
+            insertUser = sqlConnection.prepareStatement(userQuery);
+            insertUser.setString(1, personId);
+            insertUser.setString(2, uName);
+            insertUser.setString(3, pWord);
+
+            insertUser.execute();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
