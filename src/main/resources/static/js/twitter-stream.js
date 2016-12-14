@@ -18,11 +18,11 @@ $(() => {
             lat = position.coords.latitude;
             lng = position.coords.longitude;
             setLocation(lat, lng);
-            getLocation(lat, lng);
+            //getLocation(lat, lng);
         });
     };
 
-    self.getLocation = (lat, lon) => stompClient.send("/app/searchLocation", {}, JSON.stringify(currentLocation));
+    //self.getLocation = (lat, lon) => stompClient.send("/app/searchLocation", {}, JSON.stringify(currentLocation));
 
     self.setLocation = (lat, lng) => {
         map.setCenter(new google.maps.LatLng(lat, lng));
@@ -49,11 +49,25 @@ $(() => {
         setConnected(true);
         return stompClient.connect({}, isConnected => {
             stompClient.subscribe('/tweets/stream', json => {
-                    const location = JSON.parse(json.body);
-                    addPoint(location.lat, location.lng);
+                    const jsonString = JSON.parse(json.body);
+                    addPoint(jsonString.lat, jsonString.lng);
                     //postTweet(JSON.parse(tweet.body));
-                });
             });
+
+            //event listener for map coordinates
+            //every time map is moved, outer coordinates of map
+            //are sent back to the server
+            google.maps.event.addListener(map, 'idle', function(e) {
+                let bounds = map.getBounds();
+                let b = {};
+                b.north = bounds.getNorthEast().lat();
+                b.east = bounds.getNorthEast().lng();
+                b.south = bounds.getSouthWest().lat();
+                b.west = bounds.getSouthWest().lng();
+                stompClient.send("/tweets/bounds", {}, JSON.stringify(b));
+            });
+
+        });
     };
 
     self.disconnect = () => {
@@ -108,19 +122,6 @@ $(() => {
     function changeRadius() {
         heatmap.set('radius', heatmap.get('radius') ? null : 20);
     }
-
-    //event listener for map coordinates
-    //every time map is moved, outer coordinates of map
-    //are sent back to the server
-    google.maps.event.addListener(map, 'idle', function(e) {
-        let bounds = map.getBounds();
-        let b = {};
-        b.north = bounds.getNorthEast().lat();
-        b.east = bounds.getNorthEast().lng();
-        b.south = bounds.getSouthWest().lat();
-        b.west = bounds.getSouthWest().lng();
-        stompClient.send("/tweets/bounds", {}, JSON.stringify(b));
-    });
 
     /* End HeatMap */
 
