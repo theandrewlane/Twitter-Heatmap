@@ -14,6 +14,7 @@ public class DBHelper {
     private static Connection sqlConnection;
 
     public static void connection() throws IOException, SQLException {
+        
         try {
             String resourceName = "config.properties";
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -77,6 +78,7 @@ public class DBHelper {
     }
 
     public ArrayList<String> displayProfile(String userId){
+
         ArrayList<String> profile = new ArrayList<>();
         PreparedStatement statement;
 
@@ -152,5 +154,28 @@ public class DBHelper {
         catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public String checkUserName(String uName){
+
+        String validate = "1";
+        PreparedStatement statement;
+
+        try {
+            String query =  "SELECT EXISTS(SELECT UserName FROM UserInfo WHERE UserName = ?) AS Result";
+
+            statement = sqlConnection.prepareStatement(query);
+            statement.setString(1, uName);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                validate = rs.getString("Result");
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return validate;
     }
 }
