@@ -6,6 +6,7 @@ import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jthomann on 12/5/16.
@@ -13,12 +14,10 @@ import java.util.List;
 @Component
 public class TweetFilter {
 
-    public Tweet filterByHashTag(List<String> keywordList, Tweet tweet) {
-        for(String keyword : keywordList) {
-            for(HashTagEntity hashtag : tweet.getEntities().getHashTags()) {
-                if(hashtag.getText().equalsIgnoreCase(keyword)) {
-                    return tweet;
-                }
+    public Tweet filterByHashTag(Set<String> keywordList, Tweet tweet) {
+        for(HashTagEntity hashtag : tweet.getEntities().getHashTags()) {
+            if(keywordList.contains(hashtag.getText().toLowerCase())) {
+                return tweet;
             }
         }
         return null;
