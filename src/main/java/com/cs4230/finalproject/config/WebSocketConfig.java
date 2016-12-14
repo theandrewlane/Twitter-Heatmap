@@ -24,7 +24,6 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/stream-socket").withSockJS();
         registry.addEndpoint("/search").withSockJS();
-        registry.addEndpoint("/bounds").withSockJS();
     }
 
 }

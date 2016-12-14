@@ -64,7 +64,7 @@ $(() => {
                 b.east = bounds.getNorthEast().lng();
                 b.south = bounds.getSouthWest().lat();
                 b.west = bounds.getSouthWest().lng();
-                stompClient.send("/tweets/bounds", {}, JSON.stringify(b));
+                stompClient.send("/app/bounds", {}, JSON.stringify(b));
             });
 
         });

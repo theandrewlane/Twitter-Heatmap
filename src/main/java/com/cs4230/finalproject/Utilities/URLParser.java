@@ -8,8 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import com.google.gson.*;
-import com.sun.codemodel.internal.JArray;
-import jdk.nashorn.internal.parser.JSONParser;
+
 
 /**
  * Created by jthomann on 12/5/16.
