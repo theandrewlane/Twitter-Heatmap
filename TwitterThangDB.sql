@@ -51,6 +51,10 @@ ADD CONSTRAINT fk_linkPerson
 FOREIGN KEY (PersonID)
 REFERENCES Person(PersonId);
 
+ALTER TABLE UserInfo ADD UNIQUE(UserName);
+ALTER TABLE Person ADD UNIQUE(Email);
+ALTER TABLE UserInfo ADD UNIQUE(PersonID);
+
 INSERT INTO Keyword (KeywordName)
 VALUES
 	('afterparty')
@@ -101,6 +105,14 @@ VALUES
 INSERT INTO Person (FirstName, LastName, Address, City, State, PostalCode, Country, Phone, Email)
 VALUES ('TestFirst', 'TestLast', '1234 TestStreet', 'SomeCity', 'UT', '85632', 'Test Country', '18002658542', 'NotReal@Email.com');
 
+INSERT INTO Person (FirstName, LastName, Address, City, State, PostalCode, Country, Phone, Email)
+VALUES ('Arthur', 'Brennan', '1152 another street', 'WestCity', 'UT', '85632', 'Test Country', '18002658542', 'THis@Email.com');
+
+INSERT INTO UserInfo (PersonID, UserName, Pword)
+VALUES (1, 'UserName', 'p4ssw0rd');
+
+INSERT INTO UserInfo (PersonID, UserName, Pword)
+VALUES (2, 'CouchN1nja', 'irondoor');
 
 
 
