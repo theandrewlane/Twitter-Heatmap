@@ -5,17 +5,18 @@ import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jthomann on 12/5/16.
  */
 @Component
 public class KeywordReader {
-    private List<String> keywordList;
+    private Set<String> keywordList;
     private BufferedReader bf;
     private FileReader fr;
 
-    public void init(String fileName, List<String> keywordList) {
+    public void init(String fileName, Set<String> keywordList) {
         try {
             this.fr = new FileReader(fileName);
             this.bf = new BufferedReader(this.fr);
@@ -38,7 +39,7 @@ public class KeywordReader {
         }
     }
 
-    public List<String> getKeywordList() {
+    public Set<String> getKeywordList() {
         return keywordList;
     }
 }

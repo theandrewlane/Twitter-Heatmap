@@ -5,7 +5,9 @@ import com.cs4230.finalproject.model.TweetAnalysis;
 import com.cs4230.finalproject.model.TweetFilter;
 import com.cs4230.finalproject.model.TweetGeocode;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.social.twitter.api.*;
@@ -13,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.apache.coyote.http11.Constants.a;
 
@@ -26,6 +30,8 @@ public class TwitterStreamService {
 
     private SimpMessagingTemplate template;
     private int tweetCount = 0;
+
+    private JsonObject bounds;
 
     private TweetAnalysis ta;
 
@@ -44,8 +50,8 @@ public class TwitterStreamService {
         this.template = template;
     }
 
-    public List<String> getKeywordList() {
-        keywordReader.init("src/main/files/party-keywords.txt", new ArrayList<String>());
+    public Set<String> getKeywordList() {
+        keywordReader.init("src/main/files/party-keywords.txt", new HashSet<String>());
         keywordReader.readInKeywords();
         return keywordReader.getKeywordList();
     }
@@ -54,6 +60,15 @@ public class TwitterStreamService {
 ////Data from view should be sent here
 //
 //    }
+
+    @MessageMapping("/bounds")
+    public void getBounds(String jsonString) {
+        System.out.println(jsonString);
+        //parse
+        JsonParser parser = new JsonParser();
+        Object obj = parser.parse(jsonString);
+        bounds = (JsonObject) obj;
+    }
 
     @SendTo("/tweets/stream")
     public void tweetStream(JsonObject obj) {
@@ -79,7 +94,8 @@ public class TwitterStreamService {
             @Override
             public void onTweet(Tweet tweet) {
                 //Filter each tweet
-                Tweet filteredTweet = tf.filter(getKeywordList(), tweet);
+                Set<String> set = getKeywordList();
+                Tweet filteredTweet = tf.filterByHashTag(set, tweet);
                 //Geocode the filtered tweet
                 JsonObject coordinates = tg.geocode(filteredTweet);
                 //Analyze each tweet
@@ -109,15 +125,16 @@ public class TwitterStreamService {
 
         listeners.add(streamListener);
         //This sets the GeoCode (-122.75,36.8,-121.75,37.8) of San Francisco(South-West and North-East) region as given in below twitter docs
-        Float west = -111.993474f;
-        Float south = 33.332718f;
-        Float east = -111.825695f;
-        Float north = 33.4872f;
+        Float west = -124.7844079f;
+        Float south = 24.7433195f;
+        Float east = -66.9513812f;
+        Float north = 49.3457868f;
 
         FilterStreamParameters filterStreamParameters = new FilterStreamParameters();
         filterStreamParameters.addLocation(west, south, east, north);
 
         twitter.streamingOperations().filter(filterStreamParameters, listeners);
+
         return tweets;
     }
 }
