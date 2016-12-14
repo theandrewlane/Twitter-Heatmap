@@ -11,7 +11,6 @@ import java.net.URLEncoder;
 /**
  * Created by jthomann on 12/5/16.
  */
-@Component
 public class TweetGeocode {
 
     public JsonObject geocode(Tweet tweet) {
