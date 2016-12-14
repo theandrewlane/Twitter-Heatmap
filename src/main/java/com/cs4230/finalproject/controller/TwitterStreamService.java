@@ -1,9 +1,10 @@
 package com.cs4230.finalproject.controller;
 
-import com.cs4230.finalproject.Utilities.KeywordReader;
 import com.cs4230.finalproject.model.TweetAnalysis;
 import com.cs4230.finalproject.model.TweetFilter;
 import com.cs4230.finalproject.model.TweetGeocode;
+import com.cs4230.finalproject.model.TweetUser;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import static org.apache.coyote.http11.Constants.a;
 
 /**
  * Created by andrewlane on 11/16/16.
@@ -33,28 +30,12 @@ public class TwitterStreamService {
 
     private JsonObject bounds;
 
-    private TweetAnalysis ta;
-
-    @Autowired
-    private KeywordReader keywordReader = null;
-
-    @Autowired
-    private TweetFilter tf;
-
-    @Autowired
-    private TweetGeocode tg;
-
     @Autowired
     public TwitterStreamService(SimpMessagingTemplate template) {
 
         this.template = template;
     }
 
-    public Set<String> getKeywordList() {
-        keywordReader.init("src/main/files/party-keywords.txt", new HashSet<String>());
-        keywordReader.readInKeywords();
-        return keywordReader.getKeywordList();
-    }
 //    @MessageMapping("/tweetLocation")
 //    public void setLocation(String location) {
 ////Data from view should be sent here
@@ -68,11 +49,12 @@ public class TwitterStreamService {
         JsonParser parser = new JsonParser();
         Object obj = parser.parse(jsonString);
         bounds = (JsonObject) obj;
+        System.out.println(bounds.toString());
     }
 
     @SendTo("/tweets/stream")
-    public void tweetStream(JsonObject obj) {
-        this.template.convertAndSend("/tweets/stream", obj.toString());
+    public void tweetStream(String jsonString) {
+        this.template.convertAndSend("/tweets/stream", jsonString);
     }
 
 //    private final org.slf4j.Logger log = LoggerFactory.getLogger(TwitterStreamService.class);
@@ -81,8 +63,15 @@ public class TwitterStreamService {
     @Autowired
     private Twitter twitter;
 
+    private TweetAnalysis ta = new TweetAnalysis();
+
+    private TweetFilter tf = new TweetFilter();
+
+    private TweetGeocode tg = new TweetGeocode();
+
     public List<Tweet> streamApi(Model model) throws InterruptedException {
         List<StreamListener> listeners = new ArrayList<>();
+
         StreamListener streamListener = new StreamListener() {
 
             @Override
@@ -93,20 +82,27 @@ public class TwitterStreamService {
 
             @Override
             public void onTweet(Tweet tweet) {
+
                 //Filter each tweet
-                Set<String> set = null;
-                if(keywordReader == null)
-                    set = getKeywordList();
-                Tweet filteredTweet = tf.filterByHashTag(set, tweet);
+                Tweet filteredTweet = tf.filterByHashTag(tweet);
                 //Geocode the filtered tweet
                 JsonObject coordinates = tg.geocode(filteredTweet);
                 //Analyze each tweet
                 //ta.add(filteredTweet);
                 // TODO
                 //Send to GUI
-                if(coordinates != null) {
-                    tweets.add(filteredTweet);
-                    tweetStream(coordinates);
+                if(coordinates != null && locationVerification(coordinates)) {
+                    //create custom tweet class to store lat and lng
+                    //and whatever extra parameters need to be sent to the front end
+                    TweetUser user = new TweetUser();
+                    user.setLat(coordinates.get("lat").toString());
+                    user.setLng(coordinates.get("lng").toString());
+                    user.setName(filteredTweet.getUser().getName());
+                    //convert to a json string and send to stream
+                    Gson gson = new Gson();
+                    String jsonString = gson.toJson(user);
+                    //System.out.println(jsonString);
+                    tweetStream(jsonString);
                     tweetCount++;
                     model.addAttribute("tweetCount", tweetCount);
                 }
@@ -138,5 +134,26 @@ public class TwitterStreamService {
         twitter.streamingOperations().filter(filterStreamParameters, listeners);
 
         return tweets;
+    }
+
+    public boolean locationVerification(JsonObject jsonObject) {
+
+        double northCheck = Double.parseDouble(bounds.get("north").toString());
+        double southCheck = Double.parseDouble(bounds.get("south").toString());
+        double eastCheck = Double.parseDouble(bounds.get("east").toString());
+        double westCheck = Double.parseDouble(bounds.get("west").toString());
+
+        double lat = Double.parseDouble(jsonObject.get("lat").toString());
+        double lng = Double.parseDouble(jsonObject.get("lng").toString());
+
+        if (lat < westCheck || lat > eastCheck) {
+            return false;
+        }
+
+        if (lng < southCheck || lng > northCheck) {
+            return false;
+        }
+
+        return true;
     }
 }
