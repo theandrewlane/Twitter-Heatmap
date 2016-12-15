@@ -1,6 +1,6 @@
 package com.cs4230.finalproject.model;
 
-import org.springframework.social.twitter.api.Tweet;
+//import org.springframework.social.twitter.api.Tweet;
 
 /**
  * Created by jthomann on 12/14/16.

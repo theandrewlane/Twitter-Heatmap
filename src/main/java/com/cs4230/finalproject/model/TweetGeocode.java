@@ -3,7 +3,7 @@ package com.cs4230.finalproject.model;
 import com.cs4230.finalproject.Utilities.URLParser;
 import com.google.gson.JsonObject;
 import org.springframework.social.twitter.api.Tweet;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

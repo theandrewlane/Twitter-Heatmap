@@ -1,6 +1,5 @@
 package com.cs4230.finalproject.controller;
 
-import com.cs4230.finalproject.model.TweetAnalysis;
 import com.cs4230.finalproject.model.TweetFilter;
 import com.cs4230.finalproject.model.TweetGeocode;
 import com.cs4230.finalproject.model.TweetUser;
@@ -63,7 +62,7 @@ public class TwitterStreamService {
     @Autowired
     private Twitter twitter;
 
-    private TweetAnalysis ta = new TweetAnalysis();
+//    private TweetAnalysis ta = new TweetAnalysis();
 
     private TweetFilter tf = new TweetFilter();
 

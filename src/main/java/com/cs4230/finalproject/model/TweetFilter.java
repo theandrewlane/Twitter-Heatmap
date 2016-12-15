@@ -2,10 +2,10 @@ package com.cs4230.finalproject.model;
 
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.Tweet;
-import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.Collections;
+//import org.springframework.stereotype.Component;
+//
+//import java.util.Arrays;
+//import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
