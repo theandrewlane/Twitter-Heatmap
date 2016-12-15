@@ -1,0 +1,26 @@
+<div th:if="${!hasAuth}" class="login mdl-shadow--12dp mdl-color--white mdl-cell mdl-cell--12-col"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="login-page">
+        <div class="form">
+            <form class="register-form">
+                <span class="register mdl-textfield__error">Please enter a valid username</span>
+                <input class="mdl-textfield__input register-username" type="text" placeholder="username"/>
+                <input class="register-password" type="password" placeholder="password"/>
+                <input class="register-email" type="text" placeholder="email address"/>
+                <button id="create-button">create</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+            <form class="login-form">
+                <div class="login mdl-textfield mdl-js-textfield">
+                    <span class="mdl-textfield__error">Please enter a valid username</span>
+                    <input class="mdl-textfield__input auth-username" type="text" placeholder="username"
+                           pattern="[A-Z,a-z]*"
+                           aria-required="true"/>
+                    <input class="auth" type="password" placeholder="password"/>
+                    <button id="login-button">login</button>
+                    <p class="message">Not registered? <a href="#">Create an account</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
