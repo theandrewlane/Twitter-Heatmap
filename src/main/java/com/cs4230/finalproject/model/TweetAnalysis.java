@@ -1,7 +1,7 @@
-package com.cs4230.finalproject.controller;
+package com.cs4230.finalproject.model;
 
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.Tweet;
 
@@ -16,7 +16,6 @@ import java.util.*;
  */
 public class TweetAnalysis {
 
-    @Autowired
     private Map<String, Integer> htMap;
 
     private PrintWriter pw;
@@ -39,6 +38,9 @@ public class TweetAnalysis {
     public void add(Tweet t) {
         //create a list of hashtags from a tweet
         List<HashTagEntity> lht = t.getEntities().getHashTags();
+
+        if(t.getUser().getLocation() != null)
+            System.out.println(t.getUser().getLocation());
         for (HashTagEntity el : lht) {
             //put it in a hashmap and increment the frequency
             if (htMap.containsKey(el.getText())) {
