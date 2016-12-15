@@ -18,8 +18,8 @@ public class TweetGeocode {
             String location = tweet.getUser().getLocation();
             if(location == null)
                 return null;
-            String apiKey = "***REMOVED***-rLV-3PHpA";
-
+            //String apiKey = "***REMOVED***-rLV-3PHpA";
+            String apiKey = "AIzaSyA6pR06klxdID6lv-UO2YSrkJqeRirpks4";
             String urlEncodedLocation = null;
 
             urlEncodedLocation = URLEncoder.encode(location, "UTF-8");
