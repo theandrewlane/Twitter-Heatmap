@@ -1,7 +1,7 @@
 package com.cs4230.finalproject.model;
 
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.Tweet;
 
