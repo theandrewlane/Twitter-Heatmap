@@ -1,4 +1,4 @@
-<head>
+<head xmlns:th="http://www.springframework.org/schema/mvc">
     <meta http-equiv="Content-Security-Policy"
           content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'"/>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -11,5 +11,6 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm_cHHROJK12DrfzL8zE3Uh65tWEpga88&libraries=visualization"></script>
     <script src="./js/twitter-stream.js"></script>
-    <title>Twitter Demo</title>
+    <script th:if="${!hasAuth}" src="./js/user-authentication.js"></script>
+    <title>Twitter-Thing</title>
 </head>
