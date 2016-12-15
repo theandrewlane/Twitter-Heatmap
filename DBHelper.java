@@ -14,7 +14,7 @@ public class DBHelper {
     private static Connection sqlConnection;
 
     public static void connection() throws IOException, SQLException {
-        
+
         try {
             String resourceName = "config.properties";
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -36,7 +36,7 @@ public class DBHelper {
 
     public ArrayList<String> getKeywords() {
 
-        ArrayList<String> kWords = new ArrayList<String>();
+        ArrayList<String> kWords = new ArrayList<>();
         Statement statement;
 
         try {
@@ -166,6 +166,29 @@ public class DBHelper {
 
             statement = sqlConnection.prepareStatement(query);
             statement.setString(1, uName);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                validate = rs.getString("Result");
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return validate;
+    }
+
+    public String checkEmail(String email){
+
+        String validate = "1";
+        PreparedStatement statement;
+
+        try {
+            String query =  "SELECT EXISTS(SELECT Email FROM Person WHERE Email = ?) AS Result";
+
+            statement = sqlConnection.prepareStatement(query);
+            statement.setString(1, email);
 
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
