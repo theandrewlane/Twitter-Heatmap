@@ -65,7 +65,6 @@ public class TwitterController {
     public String streamTweet(Model model) throws InterruptedException {
         model.addAttribute("hasAuth", true);
         model.addAttribute("isStreaming", true);
-        twitterStreamService.streamApi(model);
         return "index";
     }
 
