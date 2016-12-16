@@ -38,6 +38,7 @@ public class TwitterController {
 
     @PostMapping("/twitter-search")
     public String tweetSearchPost(Model model) {
+        model.addAttribute("hasAuth", true);
         model.addAttribute(twitter.userOperations().getUserProfile());
         SearchResults tweets = twitter.searchOperations().search("test");
         List<Tweet> tweetz = new ArrayList<>();
@@ -54,14 +55,15 @@ public class TwitterController {
 
     @GetMapping("/twitter-search")
     public String tweetSearchGet(Model model) {
+        model.addAttribute("hasAuth", true);
         model.addAttribute("isSearching", true);
-
         model.addAttribute("tweetSearch", null);
         return "index";
     }
 
     @RequestMapping("/twitter-stream")
     public String streamTweet(Model model) throws InterruptedException {
+        model.addAttribute("hasAuth", true);
         model.addAttribute("isStreaming", true);
         twitterStreamService.streamApi(model);
         return "index";
