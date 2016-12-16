@@ -26,20 +26,16 @@ public class TwitterSignup {
 
         if (checkUser && checkEmail){
             db.newUserInfo(firstName, lastName, email, userName, password);
-
-            //then maybe reload page?? or go to their profile page??
-
+            user.setValidUserName(true);
+            user.setValidEmail(true);
         }
 
         if (!checkUser){
-            // display alert "User name is already in use"
-
+            user.setValidUserName(false);
         }
 
         if (!checkEmail){
-            //display alert "Email address must be unique"
-
-
+            user.setValidEmail(false);
         }
     }
 
