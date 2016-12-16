@@ -17,7 +17,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class TwitterController {
-    private final TwitterStreamService twitterStreamService;
+    @Inject
+    private TwitterStreamService twitterStreamService;
 
     @Inject
     private Twitter twitter;
@@ -61,7 +62,6 @@ public class TwitterController {
 
     @RequestMapping("/twitter-stream")
     public String streamTweet(Model model) throws InterruptedException {
-
         model.addAttribute("isStreaming", true);
         twitterStreamService.streamApi(model);
         return "index";
