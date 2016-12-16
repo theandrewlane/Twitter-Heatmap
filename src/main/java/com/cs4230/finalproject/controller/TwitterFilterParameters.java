@@ -4,8 +4,6 @@ import com.google.gson.JsonObject;
 import org.springframework.social.twitter.api.FilterStreamParameters;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.Twitter;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.social.twitter.api.Stream;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,5 @@
 package com.cs4230.finalproject.controller;
 
-import com.cs4230.finalproject.model.TweetAnalysis;
 import com.cs4230.finalproject.model.TweetFilter;
 import com.cs4230.finalproject.model.TweetGeocode;
 import com.cs4230.finalproject.model.TweetUser;
@@ -21,7 +20,6 @@ import java.util.List;
 @Controller
 public class TwitterStreamService implements StreamListener {
 
-    private TweetAnalysis ta = new TweetAnalysis();
     private TweetFilter tf = new TweetFilter();
     private TweetGeocode tg = new TweetGeocode();
     private int tweetCount = 0;
@@ -30,10 +28,9 @@ public class TwitterStreamService implements StreamListener {
     @Autowired
     private SendController sc;
 
+    @SuppressWarnings("unused")
     @Autowired
-    private Twitter twitter;
-
-    private ReceiveController rc = new ReceiveController();
+    private ReceiveController rc;
 
     @Override
     public void onWarning(StreamWarningEvent warningEvent) {
