@@ -3,6 +3,7 @@ package com.cs4230.finalproject.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -21,4 +22,7 @@ public class SendController {
     public void tweetStream(String jsonString) {
         this.template.convertAndSend("/tweets/stream", jsonString);
     }
+
+    @SendTo("/tweets/userinfo")
+    public void tweetUserInfo(Tweet tweet) { this.template.convertAndSend("/tweets/userinfo", tweet); }
 }
