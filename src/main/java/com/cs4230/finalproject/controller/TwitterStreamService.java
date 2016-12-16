@@ -5,14 +5,9 @@ import com.cs4230.finalproject.model.TweetGeocode;
 import com.cs4230.finalproject.model.TweetUser;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.sun.imageio.stream.StreamCloser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by andrewlane on 11/16/16.
