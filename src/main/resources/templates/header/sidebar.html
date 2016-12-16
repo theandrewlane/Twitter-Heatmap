@@ -1,7 +1,8 @@
-<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-    <header class="demo-drawer-header">
-        <img src="./images/user.jpg" class="demo-avatar">
-        <div class="demo-avatar-dropdown">
+<div class="twitter-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+    <header th:if="${hasAuth}" class="twitter-drawer-header">
+        <img src="./images/user.jpg" class="twitter-avatar">
+        <div class="twitter-avatar-dropdown">
             <span>Andrew</span>
             <div class="mdl-layout-spacer"></div>
             <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
@@ -15,7 +16,7 @@
             </ul>
         </div>
     </header>
-    <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+    <nav class="twitter-navigation mdl-navigation mdl-color--blue-grey-800">
         <a class="mdl-navigation__link" href="/"><i class="mdl-color-text--blue-grey-400 material-icons"
                                                    role="presentation">home</i>Home</a>
         <a class="mdl-navigation__link" href="/twitter-search/"><i class="mdl-color-text--blue-grey-400 material-icons"

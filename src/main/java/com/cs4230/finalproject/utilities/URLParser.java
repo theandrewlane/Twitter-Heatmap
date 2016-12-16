@@ -1,4 +1,9 @@
-package com.cs4230.finalproject.Utilities;
+package com.cs4230.finalproject.utilities;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,8 +11,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-
-import com.google.gson.*;
 
 
 /**
