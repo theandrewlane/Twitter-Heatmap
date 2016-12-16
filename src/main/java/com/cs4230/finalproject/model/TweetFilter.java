@@ -19,6 +19,10 @@ public class TweetFilter {
     public TweetFilter() {
         this.keywordSet = new HashSet<>();
         this.keywordSet.add("job");
+        this.keywordSet.add("party");
+        this.keywordSet.add("trump");
+        this.keywordSet.add("utah");
+        this.keywordSet.add("slc");
     }
 
     public Tweet filterByHashTag(Tweet tweet) {
