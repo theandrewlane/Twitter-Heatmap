@@ -54,18 +54,14 @@ $(() => {
                     //postTweet(JSON.parse(tweet.body));
             });
 
-            //event listener for map coordinates
-            //every time map is moved, outer coordinates of map
-            //are sent back to the server
-            google.maps.event.addListener(map, 'idle', function(e) {
-                let bounds = map.getBounds();
-                let b = {};
-                b.north = bounds.getNorthEast().lat();
-                b.east = bounds.getNorthEast().lng();
-                b.south = bounds.getSouthWest().lat();
-                b.west = bounds.getSouthWest().lng();
-                stompClient.send("/app/bounds", {}, JSON.stringify(b));
-            });
+            //send bounds once on connect
+            let bounds = map.getBounds();
+            let b = {};
+            b.north = bounds.getNorthEast().lat();
+            b.east = bounds.getNorthEast().lng();
+            b.south = bounds.getSouthWest().lat();
+            b.west = bounds.getSouthWest().lng();
+            stompClient.send("/app/bounds", {}, JSON.stringify(b));
 
         });
     };
@@ -101,6 +97,10 @@ $(() => {
         zoom: 13,
         mapTypeId: 'roadmap'
     });
+
+    //restrict zoom
+    const opt = { minZoom: 6, maxZoom: 15 };
+    map.setOptions(opt);
 
     // Heatmap data
     self.getPoints = () => {
