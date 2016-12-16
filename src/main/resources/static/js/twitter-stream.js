@@ -11,18 +11,14 @@ $(() => {
     let heatmap;
 
     const arrayOfPoints = new google.maps.MVCArray();
-    const currentLocation = {};
 
     self.useLocation = () => {
         navigator.geolocation.getCurrentPosition(function (position) {
             lat = position.coords.latitude;
             lng = position.coords.longitude;
             setLocation(lat, lng);
-            //getLocation(lat, lng);
         });
     };
-
-    //self.getLocation = (lat, lon) => stompClient.send("/app/searchLocation", {}, JSON.stringify(currentLocation));
 
     self.setLocation = (lat, lng) => {
         map.setCenter(new google.maps.LatLng(lat, lng));
@@ -46,28 +42,34 @@ $(() => {
         stompClient = Stomp.over(socket);
         stompClient.debug = debug || null;
         $("#stream-spinner").show();
-        setConnected(true);
-        return stompClient.connect({}, isConnected => {
-            stompClient.subscribe('/tweets/stream', json => {
+        if(!isConnected) {
+            return stompClient.connect({}, isConnected => {
+                setConnected(true);
+                stompClient.subscribe('/tweets/stream', json => {
                     const jsonString = JSON.parse(json.body);
                     addPoint(jsonString.lat, jsonString.lng);
-                    //postTweet(JSON.parse(tweet.body));
+                });
+
+                stompClient.subscribe('/tweets/userinfo', json => {
+                    postTweet(JSON.parse(json.body));
+                });
+
+                //send bounds once on connect
+                let bounds = map.getBounds();
+                let b = {};
+                b.north = bounds.getNorthEast().lat();
+                b.east = bounds.getNorthEast().lng();
+                b.south = bounds.getSouthWest().lat();
+                b.west = bounds.getSouthWest().lng();
+                stompClient.send("/app/bounds", {}, JSON.stringify(b));
             });
-
-            //send bounds once on connect
-            let bounds = map.getBounds();
-            let b = {};
-            b.north = bounds.getNorthEast().lat();
-            b.east = bounds.getNorthEast().lng();
-            b.south = bounds.getSouthWest().lat();
-            b.west = bounds.getSouthWest().lng();
-            stompClient.send("/app/bounds", {}, JSON.stringify(b));
-
-        });
+        }
     };
 
     self.disconnect = () => {
         if (isConnected) {
+            stompClient.send("/app/disconnect", {}, "ewd87yewdew87dewcew3");
+            stompClient.unsubscribe();
             stompClient.disconnect();
             setConnected(false);
             $("#tweet-content > *").remove();
