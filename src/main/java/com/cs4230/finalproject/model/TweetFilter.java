@@ -1,11 +1,14 @@
 package com.cs4230.finalproject.model;
 
+import com.cs4230.finalproject.service.DBHelper;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.Tweet;
 //import org.springframework.stereotype.Component;
 //
 //import java.util.Arrays;
 //import java.util.Collections;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,12 +20,12 @@ public class TweetFilter {
     private Set<String> keywordSet;
 
     public TweetFilter() {
-        this.keywordSet = new HashSet<>();
-        this.keywordSet.add("job");
-        this.keywordSet.add("party");
-        this.keywordSet.add("trump");
-        this.keywordSet.add("utah");
-        this.keywordSet.add("slc");
+        try {
+            DBHelper.connection();
+        } catch (IOException | SQLException e){
+            e.printStackTrace();
+        }
+        this.keywordSet = new HashSet<>(new DBHelper().getKeywords());
     }
 
     public Tweet filterByHashTag(Tweet tweet) {
@@ -33,17 +36,4 @@ public class TweetFilter {
         }
         return null;
     }
-
-    public Tweet filter(Tweet tweet) {
-        String[] tweetedWords = tweet.getText().split(" ");
-        for(String keyword : keywordSet) {
-            for(String text : tweetedWords) {
-                if(text.equalsIgnoreCase(keyword)) {
-                    return tweet;
-                }
-            }
-        }
-        return null;
-    }
-
 }
