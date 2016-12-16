@@ -39,6 +39,7 @@ public class TwitterLogin {
         else {
             profile = db.displayProfile(validate);
             user.setValid(true);
+            user.setProfile(profile);
 
             //go to profile page and pass profile arrayList
 
