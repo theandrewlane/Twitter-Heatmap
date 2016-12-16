@@ -18,17 +18,11 @@ public class DBHelper {
     public static void connection() throws IOException, SQLException {
 
         try {
-            String resourceName = "config.properties";
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            Properties props = new Properties();
-            try (InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
-                props.load(resourceStream);
-            }
-            String username = props.getProperty("username");
-            String password = props.getProperty("password");
-
-            String server = "jdbc:mysql://127.0.0.1:3306/TwitterThangDB";
-
+            //Use environment variables to define connection parameters
+            //These string values can be found on the team slack stream
+            String username = System.getProperty("DB_USER") ;
+            String password = System.getProperty("DB_USER");
+            String server = System.getProperty("DB_CONNECTION_STRING");
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             sqlConnection = DriverManager.getConnection(server, username, password);
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
