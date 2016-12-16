@@ -17,6 +17,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class TwitterController {
+    @SuppressWarnings("unused")
     @Inject
     private TwitterStreamService twitterStreamService;
 
@@ -24,8 +25,8 @@ public class TwitterController {
     private Twitter twitter;
 
     @Inject
-    public TwitterController(TwitterStreamService streamService, Twitter twitter) {
-        this.twitterStreamService = streamService;
+    public TwitterController(TwitterStreamService twitterStreamService, Twitter twitter) {
+        this.twitterStreamService = twitterStreamService;
         this.twitter = twitter;
     }
 
