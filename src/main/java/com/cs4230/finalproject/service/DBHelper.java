@@ -18,7 +18,7 @@ public class DBHelper {
     public static void connection() throws IOException, SQLException {
 
         try {
-            String resourceName = "config.properties";
+            String resourceName = "resources.application.properties";
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             Properties props = new Properties();
             try (InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
@@ -108,9 +108,7 @@ public class DBHelper {
         return profile;
     }
 
-    public void newUserInfo(String fname, String lname, String address, String city, String state,
-                            String pCode, String country, String phone, String email,
-                            String uName, String pWord) {
+    public void newUserInfo(String fname, String lname, String email, String uName, String pWord) {
 
         PreparedStatement insertPerson;
         PreparedStatement getPersonId;
@@ -119,19 +117,13 @@ public class DBHelper {
         String personId = "";
 
         try {
-            String personQuery = "INSERT INTO Person (FirstName, LastName, Address, City, State, PostalCode, Country, Phone, Email) " +
-                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String personQuery = "INSERT INTO Person (FirstName, LastName, Email) " +
+                                 "VALUES (?, ?, ?)";
 
             insertPerson = sqlConnection.prepareStatement(personQuery);
             insertPerson.setString(1, fname);
             insertPerson.setString(2, lname);
-            insertPerson.setString(3, address);
-            insertPerson.setString(4, city);
-            insertPerson.setString(5, state);
-            insertPerson.setString(6, pCode);
-            insertPerson.setString(7, country);
-            insertPerson.setString(8, phone);
-            insertPerson.setString(9, email);
+            insertPerson.setString(3, email);
 
             insertPerson.execute();
 
