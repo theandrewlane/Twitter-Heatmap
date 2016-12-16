@@ -32,6 +32,8 @@ public class TwitterController {
 
     @RequestMapping("/")
     public String home(Model model) {
+        //This is only set to true here for testing purposes... setting to false will trigger a login scenario
+        model.addAttribute("hasAuth", true);
         return "index";
     }
 
@@ -64,5 +66,14 @@ public class TwitterController {
         model.addAttribute("isStreaming", true);
         twitterStreamService.streamApi(model);
         return "index";
+    }
+
+    //This is only set up for testing purposes -
+    //We should use this strategy for authentication - http://www.bogotobogo.com/Java/tutorials/Spring-Boot/Spring-Boot-Authetication-Securing-Web-Application.php
+    @RequestMapping("/login")
+    public String authCheck(Model model) {
+        //If user isn't authenticated, they should be pushed to the login page
+        model.addAttribute("hasAuth", false);
+        return "user/login";
     }
 }
