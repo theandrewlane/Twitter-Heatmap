@@ -18,12 +18,14 @@ import java.util.List;
 @Controller
 public class ReceiveController {
 
-    private List<StreamListener> listeners = new ArrayList<>();
-    private List<Tweet> tweets = new ArrayList<>();
+    private final List<StreamListener> listeners = new ArrayList<>();
+    private final List<Tweet> tweets = new ArrayList<>();
 
+    @SuppressWarnings("SpringAutowiredFieldsWarningInspection")
     @Autowired
     private Twitter twitter;
 
+    @SuppressWarnings("SpringAutowiredFieldsWarningInspection")
     @Autowired
     private TwitterStreamService tss;
 

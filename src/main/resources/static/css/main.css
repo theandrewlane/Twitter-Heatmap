@@ -1,15 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-#main-content {
-    max-width: 940px;
-    padding: 2em 3em;
-    margin: 0 auto 20px;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-
-    border-radius: 5px;
-}
-
 html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
 }
@@ -24,22 +14,11 @@ html, body {
     padding-top: 27px;
 }
 
-.mdl-layout__header .mdl-layout__drawer-button {
-    color: black;
-}
-
-.mdl-layout__drawer .avatar {
-    margin-bottom: 16px;
-}
-
 .twitter-drawer {
     border: none;
 }
 
 /* iOS Safari specific workaround */
-.twitter-drawer .mdl-menu__container {
-    z-index: -1;
-}
 
 .twitter-drawer .twitter-navigation {
     z-index: -2;
@@ -130,31 +109,11 @@ html, body {
     margin-right: 32px;
 }
 
-.twitter-content {
-    max-width: 1080px;
-}
-
 .twitter-charts {
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-}
-
-.twitter-chart:nth-child(1) {
-    color: #ACEC00;
-}
-
-.twitter-chart:nth-child(2) {
-    color: #00BBD6;
-}
-
-.twitter-chart:nth-child(3) {
-    color: #BA65C9;
-}
-
-.twitter-chart:nth-child(4) {
-    color: #EF3C79;
 }
 
 .twitter-graphs {
@@ -223,12 +182,6 @@ _:-ms-input-placeholder, :root .twitter-graph {
     font-size: 1em;
 }
 
-.twitter-updates .mdl-card__title {
-    min-height: 200px;
-    background-image: url('images/dog.png');
-    background-position: 90% 100%;
-    background-repeat: no-repeat;
-}
 
 .twitter-cards .mdl-card__actions a {
     color: #00BCD4;
@@ -359,9 +312,7 @@ _:-ms-input-placeholder, :root .twitter-graph {
     color: #000000;
     text-decoration: none;
 }
-.container .info span .fa {
-    color: #EF3B3A;
-}
+
 .login-body {
     background: #76b852; /* fallback for old browsers */
     background: -webkit-linear-gradient(right, #76b852, #8DC26F);
@@ -371,4 +322,11 @@ _:-ms-input-placeholder, :root .twitter-graph {
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+#stream-spinner{
+    width: 100%;
+}
+#map {
+    height: 85%;
+    vertical-alignment: stretch;
 }

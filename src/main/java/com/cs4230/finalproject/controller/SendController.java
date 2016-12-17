@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class SendController {
-    private SimpMessagingTemplate template;
+    private final SimpMessagingTemplate template;
 
     @Autowired
     public SendController(SimpMessagingTemplate template) {

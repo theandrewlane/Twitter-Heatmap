@@ -1,15 +1,8 @@
 package com.cs4230.finalproject.service;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Properties;
 
 public class DBHelper {
 
@@ -20,9 +13,9 @@ public class DBHelper {
         try {
             //Use environment variables to define connection parameters
             //These string values can be found on the team slack stream
-            String username = System.getProperty("DB_USER") ;
-            String password = System.getProperty("DB_USER");
-            String server = System.getProperty("DB_CONNECTION_STRING");
+            String username = System.getenv("DB_USER") ;
+            String password = System.getenv("DB_PASS");
+            String server = System.getenv("DB_CONNECTION_STRING");
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             sqlConnection = DriverManager.getConnection(server, username, password);
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {

@@ -5,22 +5,21 @@
                 <button id="stop-stream-button"
                         class="mdl-button mdl-js-button mdl-button--accent mdl-button--raised mdl-js-ripple-effect"
                         onclick="disconnect()">
+                    <i class="material-icons" role="presentation">pause_circle_filled</i>
                     Stop Stream
                 </button>
+
                 <button id="start-stream-button"
-                        class="mdl-button mdl-js-button mdl-button--accent mdl-button--raised mdl-js-ripple-effect"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
                         onclick="connect('/stream-socket')">
+                    <i class="material-icons" role="presentation">play_circle_filled</i>
                     Start Stream
                 </button>
-                <i id="stream-spinner" class="mdl-spinner mdl-js-spinner is-active"></i>
             </div>
         </div>
-        <div class="col-xs-8">
-            <div id="map"></div>
-        </div>
-        <div class="col-xs-4">
-            <h3>Tweets</h3>
-            <ul class="mdl-list" id="tweet-content"></ul>
-        </div>
+    </div>
+    <div class="mdl-shadow--16dp mdl-color--white mdl-cell mdl-cell--12-col full-width full-height">
+        <div id="stream-spinner" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+        <div id="map"></div>
     </div>
 </div>

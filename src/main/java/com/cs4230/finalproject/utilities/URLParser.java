@@ -24,8 +24,6 @@ public class URLParser {
         try {
             this.url = new URL(urlString);
             this.urlConnection = url.openConnection();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

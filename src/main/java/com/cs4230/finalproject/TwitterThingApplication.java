@@ -14,10 +14,10 @@ public class TwitterThingApplication {
 
     @Bean
     public Twitter twitter() {
-        String consumerKey = System.getProperty("TWIT_CONSUMER_KEY");// The application's consumer key
-        String consumerSecret = System.getProperty("TWIT_CONSUMER_SECRET");// The application's consumer secret
-        String accessToken = System.getProperty("TWIT_ACCESS_TOKEN");// The access token granted after OAuth authorization
-        String accessTokenSecret = System.getProperty("TWIT_ACCESS_TOKEN_SECRET");// The access token secret granted after OAuth authorization
+        String consumerKey = System.getenv("TWIT_CONSUMER_KEY");// The application's consumer key
+        String consumerSecret = System.getenv("TWIT_CONSUMER_SECRET");// The application's consumer secret
+        String accessToken = System.getenv("TWIT_ACCESS_TOKEN");// The access token granted after OAuth authorization
+        String accessTokenSecret = System.getenv("TWIT_ACCESS_TOKEN_SECRET");// The access token secret granted after OAuth authorization
         return new TwitterTemplate(consumerKey, consumerSecret, accessToken, accessTokenSecret);
     }
 }
