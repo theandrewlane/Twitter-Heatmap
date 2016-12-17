@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
  * Created by andrewlane on 11/16/16.
  */
 
+@SuppressWarnings("SpringAutowiredFieldsWarningInspection")
 @Controller
 public class TwitterStreamService implements StreamListener {
 

@@ -17,9 +17,8 @@ public class TweetGeocode {
             String location = tweet.getUser().getLocation();
             if(location == null)
                 return null;
-            String apiKey = System.getProperty("MAPS_API_KEY");
-            String urlEncodedLocation = null;
-            urlEncodedLocation = URLEncoder.encode(location, "UTF-8");
+            String apiKey = System.getenv("MAPS_API_KEY");
+            String urlEncodedLocation = URLEncoder.encode(location, "UTF-8");
 
             String baseUrl = "https://maps.googleapis.com/maps/api/geocode/";
             String format = "json";

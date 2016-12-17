@@ -3,16 +3,14 @@
     <header th:if="${hasAuth}" class="twitter-drawer-header">
         <img src="./images/user.jpg" class="twitter-avatar">
         <div class="twitter-avatar-dropdown">
-            <span>Andrew</span>
+            <span>//TODO add username here</span>
             <div class="mdl-layout-spacer"></div>
             <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
                 <i class="material-icons" role="presentation">arrow_drop_down</i>
                 <span class="visuallyhidden">Accounts</span>
             </button>
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-                <li class="mdl-menu__item">hello@example.com</li>
-                <li class="mdl-menu__item">info@example.com</li>
-                <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+                <li class="mdl-menu__item"><i class="material-icons">minus</i>Sign out</li>
             </ul>
         </div>
     </header>
@@ -20,11 +18,11 @@
         <a class="mdl-navigation__link" href="/"><i class="mdl-color-text--blue-grey-400 material-icons"
                                                    role="presentation">home</i>Home</a>
         <a class="mdl-navigation__link" href="/twitter-search/"><i class="mdl-color-text--blue-grey-400 material-icons"
-                                                   role="presentation">inbox</i>Twitter Search</a>
+                                                   role="presentation">search</i>Twitter Search</a>
         <a class="mdl-navigation__link" href="/twitter-stream"><i class="mdl-color-text--blue-grey-400 material-icons"
-                                                   role="presentation">people</i>Twitter Stream</a>
+                                                   role="presentation">location_on</i>Twitter Stream</a>
         <div class="mdl-layout-spacer"></div>
-        <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons"
+        <a class="mdl-navigation__link" href="https://github.com/WeberCS4230/Twitter-Thing"><i class="mdl-color-text--blue-grey-400 material-icons"
                                                    role="presentation">help_outline</i><span
                 class="visuallyhidden">Help</span></a>
     </nav>
