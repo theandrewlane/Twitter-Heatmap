@@ -14,12 +14,12 @@ import java.util.*;
  * and will be filtered and stored accordingly
  * Created by jthomann on 11/27/16.
  */
-public class TweetAnalysis {
+class TweetAnalysis {
 
-    private Map<String, Integer> htMap;
+    private final Map<String, Integer> htMap;
 
     private PrintWriter pw;
-    private Timer timer = new Timer();
+    private final Timer timer = new Timer();
 
     /**
      * Constructor

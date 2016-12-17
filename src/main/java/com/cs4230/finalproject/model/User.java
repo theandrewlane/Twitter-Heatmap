@@ -4,7 +4,7 @@ package com.cs4230.finalproject.model;
  * Created by andrewlane on 12/14/16.
  */
 
-public class User {
+class User {
 
     private String userName;
     private String password;

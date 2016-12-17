@@ -5,7 +5,6 @@
 //Onload function block
 $(() => {
     const self = this;
-
     $('.message a').click(() => self.fadeOut($('form')));
 
     //Fade everything back in

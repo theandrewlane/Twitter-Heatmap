@@ -1,15 +1,8 @@
 package com.cs4230.finalproject.service;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Properties;
 
 public class DBHelper {
 
@@ -18,17 +11,11 @@ public class DBHelper {
     public static void connection() throws IOException, SQLException {
 
         try {
-            String resourceName = "config.properties";
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            Properties props = new Properties();
-            try (InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
-                props.load(resourceStream);
-            }
-            String username = props.getProperty("username");
-            String password = props.getProperty("password");
-
-            String server = "jdbc:mysql://127.0.0.1:3306/TwitterThangDB";
-
+            //Use environment variables to define connection parameters
+            //These string values can be found on the team slack stream
+            String username = System.getenv("DB_USER") ;
+            String password = System.getenv("DB_PASS");
+            String server = System.getenv("DB_CONNECTION_STRING");
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             sqlConnection = DriverManager.getConnection(server, username, password);
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
