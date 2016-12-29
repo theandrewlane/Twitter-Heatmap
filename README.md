@@ -1,9 +1,10 @@
-#CS 4230 - Group Project
+
+# This Project is no longer deployed
 <hr>
-##Realtime Travis CI Build Status: 
+## Travis CI Build Status: 
 [![Build Status](https://travis-ci.com/WeberCS4230/Twitter-Thing.svg?token=Ntw63fVp4a3VNZLyV15H&branch=master)](https://travis-ci.com/WeberCS4230/Twitter-Thing)
 
-##Realtime Heroku Deploument Status: 
+## Heroku Deploument Status: 
 [![Heroku Deployment Status](https://heroku-badge.herokuapp.com/?app=cs4230-twitter-thing&svg=1)](https://cs4230-twitter-thing.herokuapp.com/) 
 
 ##Links:
